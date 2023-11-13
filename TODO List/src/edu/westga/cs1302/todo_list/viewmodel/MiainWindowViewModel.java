@@ -13,6 +13,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
+import javafx.scene.control.Alert;
 
 /**The ViewModel for MainWidow
  * 
@@ -51,5 +52,247 @@ public class MiainWindowViewModel {
 		this.sortingComparatorList.add(new TimeToCompleteComparator());
 		this.taskSortingComparator = new SimpleObjectProperty<Comparator<Task>>(this.sortingComparatorList.get(0));
 		this.deatails = new SimpleStringProperty("");
+	}
+
+	/**Adds task to the list of task using the title description hour and priority given by code behind
+	 * 
+	 */
+	public void addTask() {
+		try {
+			Task newTask = new Task(this.taskTitle.getValue(), this.taskDescription.getValue(), this.taskHour.getValue(), this.taskPriority.getValue());
+			this.taskList.add(newTask);
+			this.updateDisplay();
+		} catch (NullPointerException e) {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setContentText(e.getMessage());
+			alert.showAndWait();
+		} catch (IllegalArgumentException e) {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setContentText(e.getMessage());
+			alert.showAndWait();
+		}
+		
+	}
+	
+	/**Adds a sub task to the selected task passes in from the code behind alone with the title description hour and priority given by code behind
+	 * 
+	 */
+	public void addSubTask() {
+		try {
+			Task newSubTask = new Task(this.taskTitle.getValue(), this.taskDescription.getValue(), this.taskHour.getValue(), this.taskPriority.getValue());
+			this.selectedTask.getValue().addSubTask(newSubTask);
+			this.updateDisplay();
+		} catch (NullPointerException e) {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setContentText(e.getMessage());
+			alert.showAndWait();
+		} catch (IllegalArgumentException e) {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setContentText(e.getMessage());
+			alert.showAndWait();
+		}
+		
+	}
+	
+	/**This will sort the list and assign the detail of the selected task if not null
+	 * 
+	 */
+	public void updateDisplay() {
+		try {
+			this.taskList.getValue().sort(this.taskSortingComparator.getValue());
+			if (this.selectedTask != null) {
+				this.deatails = new SimpleStringProperty(this.selectedTask.getValue().getFullDetails());
+			}
+		} catch (IllegalArgumentException e) {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setContentText(e.getMessage());
+			alert.showAndWait();
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/**Gets task title
+	 * 
+	 * @return task title
+	 */
+	public StringProperty getTaskTitle() {
+		return this.taskTitle;
+	}
+
+	/**Gets task description
+	 * 
+	 * @return task description
+	 */
+	public StringProperty getTaskDescription() {
+		return this.taskDescription;
+	}
+
+	/**Gets list of hours
+	 * 
+	 * @return list of hours
+	 */
+	public ListProperty<Integer> getHoursList() {
+		return this.hoursList;
+	}
+
+	/**Gets task hour
+	 * 
+	 * @return task hour
+	 */
+	public ObjectProperty<Integer> getTaskHour() {
+		return this.taskHour;
+	}
+
+	/**Gets list of priorities
+	 * 
+	 * @return list of priorities
+	 */
+	public ListProperty<TaskPriority> getPriorityList() {
+		return this.priorityList;
+	}
+
+	/**Gets task priority
+	 * 
+	 * @return task priority
+	 */
+	public ObjectProperty<TaskPriority> getTaskPriority() {
+		return this.taskPriority;
+	}
+
+	/**Gets list of  task
+	 * 
+	 * @return list of task
+	 */
+	public ListProperty<Task> getTaskList() {
+		return this.taskList;
+	}
+
+	/**Gets task selected
+	 * 
+	 * @return task slected
+	 */
+	public ObjectProperty<Task> getSelectedTask() {
+		return this.selectedTask;
+	}
+
+	/**Gets list of comparators
+	 * 
+	 * @return list of comparators
+	 */
+	public ListProperty<Comparator<Task>> getSortingComparatorList() {
+		return this.sortingComparatorList;
+	}
+
+	/**Gets current comparator
+	 * 
+	 * @return current comparator
+	 */
+	public ObjectProperty<Comparator<Task>> getTaskSortingComparator() {
+		return this.taskSortingComparator;
+	}
+
+	/**Gets task details
+	 * 
+	 * @return task details
+	 */
+	public StringProperty getDeatails() {
+		return this.deatails;
 	}
 }
