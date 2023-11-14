@@ -14,7 +14,7 @@ import edu.westga.cs1302.todo_list.viewmodel.MainWindowViewModel;
 /**
  * Codebehind for the MainWindow of the Application.
  * 
- * @author CS 1302
+ * @author Jacob Baker
  * @version Fall 2023
  */
 public class MainWindow {

@@ -70,6 +70,10 @@ public class MainWindowViewModel {
 			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.setContentText(e.getMessage());
 			alert.showAndWait();
+		} catch (ExceptionInInitializerError e) {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setContentText(e.getMessage());
+			alert.showAndWait();
 		}
 		this.updateDisplay();
 	}
@@ -82,6 +86,10 @@ public class MainWindowViewModel {
 			Task newSubTask = new Task(this.taskTitle.getValue(), this.taskDescription.getValue(), this.taskHour.getValue(), this.taskPriority.getValue());
 			this.selectedTask.getValue().addSubTask(newSubTask);
 		} catch (IllegalArgumentException e) {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setContentText(e.getMessage());
+			alert.showAndWait();
+		} catch (ExceptionInInitializerError e) {
 			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.setContentText(e.getMessage());
 			alert.showAndWait();

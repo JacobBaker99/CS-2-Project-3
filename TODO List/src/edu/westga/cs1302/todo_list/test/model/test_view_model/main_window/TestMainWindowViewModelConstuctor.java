@@ -3,14 +3,17 @@ package edu.westga.cs1302.todo_list.test.model.test_view_model.main_window;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.Test;
-
 import edu.westga.cs1302.todo_list.model.PriorityComparator;
 import edu.westga.cs1302.todo_list.model.TaskPriority;
 import edu.westga.cs1302.todo_list.model.TimeToCompleteComparator;
 import edu.westga.cs1302.todo_list.viewmodel.MainWindowViewModel;
 
+/**Testing MainWindowViewModel constructor initializing 
+ * 
+ * @author Jacob Baker
+ * @version Fall 2023
+ */
 public class TestMainWindowViewModelConstuctor {
 
 	@Test

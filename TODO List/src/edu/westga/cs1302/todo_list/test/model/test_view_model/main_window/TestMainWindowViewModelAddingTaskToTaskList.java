@@ -1,17 +1,19 @@
 package edu.westga.cs1302.todo_list.test.model.test_view_model.main_window;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.util.ArrayList;
-
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
-
 import edu.westga.cs1302.todo_list.model.TaskPriority;
 import edu.westga.cs1302.todo_list.viewmodel.MainWindowViewModel;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 
+/**Testing AddingTask in MianWindowViewModel
+ * 
+ * @author Jacob Baker
+ * @version Fall 2023
+ * 
+ */
 public class TestMainWindowViewModelAddingTaskToTaskList {
 
 	@Test
@@ -83,6 +85,8 @@ public class TestMainWindowViewModelAddingTaskToTaskList {
 	}
 	
 	@Test
-	
-	
+	public void testAddingNothingToList() {
+		MainWindowViewModel vm = new MainWindowViewModel();
+		assertThrows(ExceptionInInitializerError.class, ()->{vm.addTask();});	
+	}
 }
