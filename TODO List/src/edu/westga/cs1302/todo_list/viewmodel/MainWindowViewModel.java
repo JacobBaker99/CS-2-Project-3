@@ -14,13 +14,14 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.scene.control.Alert;
+import javafx.scene.control.MultipleSelectionModel;
 
 /**The ViewModel for MainWidow
  * 
  * @author Jacob Baker
  * @version Fall 2023
  */
-public class MiainWindowViewModel {
+public class MainWindowViewModel {
 	private StringProperty taskTitle;
 	private StringProperty taskDescription;
 	private ListProperty<Integer> hoursList;
@@ -36,7 +37,7 @@ public class MiainWindowViewModel {
 	/**The constructor to initialize the values and properties
 	 * 
 	 */
-	public MiainWindowViewModel() {
+	public MainWindowViewModel() {
 		this.taskTitle = new SimpleStringProperty("");
 		this.taskDescription = new SimpleStringProperty("");
 		this.hoursList = new SimpleListProperty<Integer>(FXCollections.observableArrayList(new ArrayList<Integer>()));
@@ -51,27 +52,27 @@ public class MiainWindowViewModel {
 		this.sortingComparatorList.add(new PriorityComparator());
 		this.sortingComparatorList.add(new TimeToCompleteComparator());
 		this.taskSortingComparator = new SimpleObjectProperty<Comparator<Task>>(this.sortingComparatorList.get(0));
-		this.deatails = new SimpleStringProperty("");
+		this.deatails = new SimpleStringProperty("fuck");
 	}
 
 	/**Adds task to the list of task using the title description hour and priority given by code behind
 	 * 
 	 */
 	public void addTask() {
-		try {
+//		try {
 			Task newTask = new Task(this.taskTitle.getValue(), this.taskDescription.getValue(), this.taskHour.getValue(), this.taskPriority.getValue());
 			this.taskList.add(newTask);
-			this.updateDisplay();
-		} catch (NullPointerException e) {
-			Alert alert = new Alert(Alert.AlertType.ERROR);
-			alert.setContentText(e.getMessage());
-			alert.showAndWait();
-		} catch (IllegalArgumentException e) {
-			Alert alert = new Alert(Alert.AlertType.ERROR);
-			alert.setContentText(e.getMessage());
-			alert.showAndWait();
-		}
-		
+//			
+//		} catch (NullPointerException e) {
+//			Alert alert = new Alert(Alert.AlertType.ERROR);
+//			alert.setContentText(e.getMessage());
+//			alert.showAndWait();
+//		} catch (IllegalArgumentException e) {
+//			Alert alert = new Alert(Alert.AlertType.ERROR);
+//			alert.setContentText(e.getMessage());
+//			alert.showAndWait();
+//		}
+		this.updateDisplay();
 	}
 	
 	/**Adds a sub task to the selected task passes in from the code behind alone with the title description hour and priority given by code behind
@@ -81,37 +82,38 @@ public class MiainWindowViewModel {
 		try {
 			Task newSubTask = new Task(this.taskTitle.getValue(), this.taskDescription.getValue(), this.taskHour.getValue(), this.taskPriority.getValue());
 			this.selectedTask.getValue().addSubTask(newSubTask);
-			this.updateDisplay();
-		} catch (NullPointerException e) {
-			Alert alert = new Alert(Alert.AlertType.ERROR);
-			alert.setContentText(e.getMessage());
-			alert.showAndWait();
 		} catch (IllegalArgumentException e) {
 			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.setContentText(e.getMessage());
 			alert.showAndWait();
 		}
-		
+		this.updateDisplay();
 	}
 	
 	/**This will sort the list and assign the detail of the selected task if not null
 	 * 
 	 */
-	public void updateDisplay() {
-		try {
-			this.taskList.getValue().sort(this.taskSortingComparator.getValue());
-			if (this.selectedTask != null) {
-				this.deatails = new SimpleStringProperty(this.selectedTask.getValue().getFullDetails());
-			}
-		} catch (IllegalArgumentException e) {
-			Alert alert = new Alert(Alert.AlertType.ERROR);
-			alert.setContentText(e.getMessage());
-			alert.showAndWait();
+	public void updateDisplay() throws NullPointerException {
+		this.taskList.getValue().sort(this.taskSortingComparator.getValue());
+		//TODO fix this issue throws nulls, but considered not null
+		if (this.selectedTask == null) {
+			System.out.print("== null");
+		} 
+		if (this.selectedTask != null && this.taskList.size()>0) {
+			System.out.print("!= null");
+			System.out.print(this.selectedTask.getValue().getTitle());
+			this.deatails = new SimpleStringProperty("ght");
+			//this.deatails = new SimpleStringProperty(this.taskList.get(0).getFullDetails());
+		} else {
+			this.deatails = new SimpleStringProperty("");
 		}
 		
 	}
 	
 	
+	//public void assignDetails() {
+		
+	//}
 	
 	
 	
@@ -124,8 +126,10 @@ public class MiainWindowViewModel {
 	
 	
 	
-	
-	
+	public void setSelectedTask (Task taskSelected) {
+		this.selectedTask = new SimpleObjectProperty<Task>(taskSelected);
+		this.updateDisplay();
+	}
 	
 	
 	
