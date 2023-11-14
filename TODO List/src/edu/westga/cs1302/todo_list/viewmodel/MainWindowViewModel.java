@@ -14,7 +14,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.scene.control.Alert;
-import javafx.scene.control.MultipleSelectionModel;
 
 /**The ViewModel for MainWidow
  * 
@@ -59,19 +58,19 @@ public class MainWindowViewModel {
 	 * 
 	 */
 	public void addTask() {
-//		try {
+		try {
 			Task newTask = new Task(this.taskTitle.getValue(), this.taskDescription.getValue(), this.taskHour.getValue(), this.taskPriority.getValue());
 			this.taskList.add(newTask);
-//			
-//		} catch (NullPointerException e) {
-//			Alert alert = new Alert(Alert.AlertType.ERROR);
-//			alert.setContentText(e.getMessage());
-//			alert.showAndWait();
-//		} catch (IllegalArgumentException e) {
-//			Alert alert = new Alert(Alert.AlertType.ERROR);
-//			alert.setContentText(e.getMessage());
-//			alert.showAndWait();
-//		}
+			
+		} catch (NullPointerException e) {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setContentText(e.getMessage());
+			alert.showAndWait();
+		} catch (IllegalArgumentException e) {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setContentText(e.getMessage());
+			alert.showAndWait();
+		}
 		this.updateDisplay();
 	}
 	
@@ -93,124 +92,31 @@ public class MainWindowViewModel {
 	/**This will sort the list and assign the detail of the selected task if not null
 	 * 
 	 */
-	public void updateDisplay() throws NullPointerException {
-		this.taskList.getValue().sort(this.taskSortingComparator.getValue());
-		//TODO fix this issue throws nulls, but considered not null
-		if (this.selectedTask == null) {
-			System.out.print("== null");
-		} 
-		if (this.selectedTask != null && this.taskList.size()>0) {
-			System.out.print("!= null");
-			System.out.print(this.selectedTask.getValue().getTitle());
-			this.deatails = new SimpleStringProperty("ght");
-			//this.deatails = new SimpleStringProperty(this.taskList.get(0).getFullDetails());
-		} else {
-			this.deatails = new SimpleStringProperty("");
+	public void updateDisplay() {
+		try {
+			this.taskList.getValue().sort(this.taskSortingComparator.getValue());
+		} catch (NullPointerException e) {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setContentText(e.getMessage());
+			alert.showAndWait();
+		} catch (IllegalArgumentException e) {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setContentText(e.getMessage());
+			alert.showAndWait();
 		}
-		
+		if (this.selectedTask.getValue() != null) {
+			this.deatails.set(this.selectedTask.getValue().getFullDetails());
+		}
 	}
 	
-	
-	//public void assignDetails() {
-		
-	//}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	public void setSelectedTask (Task taskSelected) {
+	/**This allows the codebehind to pass a clicked value through to the view model
+	 * 
+	 * @param taskSelected is the task that was clicked on by the user
+	 */
+	public void setSelectedTask(Task taskSelected) {
 		this.selectedTask = new SimpleObjectProperty<Task>(taskSelected);
 		this.updateDisplay();
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	/**Gets task title
 	 * 
