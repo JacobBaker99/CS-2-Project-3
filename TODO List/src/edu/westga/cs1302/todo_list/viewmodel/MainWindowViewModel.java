@@ -50,8 +50,8 @@ public class MainWindowViewModel {
 		this.sortingComparatorList = new SimpleListProperty<Comparator<Task>>(FXCollections.observableArrayList(new ArrayList<Comparator<Task>>()));
 		this.sortingComparatorList.add(new PriorityComparator());
 		this.sortingComparatorList.add(new TimeToCompleteComparator());
-		this.taskSortingComparator = new SimpleObjectProperty<Comparator<Task>>(this.sortingComparatorList.get(0));
-		this.deatails = new SimpleStringProperty("fuck");
+		this.taskSortingComparator = new SimpleObjectProperty<Comparator<Task>>(this.sortingComparatorList.getValue().get(0));
+		this.deatails = new SimpleStringProperty("");
 	}
 
 	/**Adds task to the list of task using the title description hour and priority given by code behind
@@ -205,4 +205,105 @@ public class MainWindowViewModel {
 	public StringProperty getDeatails() {
 		return this.deatails;
 	}
+
+	
+	
+	/**
+	 * Below is for testing purposes
+	 */
+	
+	
+	
+	
+	/**Sets Task titles strictly for testing
+	 * 
+	 * @param taskTitle the tile being set
+	 */
+	public void setTaskTitle(StringProperty taskTitle) {
+		this.taskTitle = taskTitle;
+	}
+
+	/**Sets task description strictly for testing
+	 * 
+	 * @param taskDescription the description being set
+	 */
+	public void setTaskDescription(StringProperty taskDescription) {
+		this.taskDescription = taskDescription;
+	}
+
+	/**Sets Task Hour strictly for testing
+	 * 
+	 * @param taskHour the hour being set
+	 */
+	public void setTaskHour(ObjectProperty<Integer> taskHour) {
+		this.taskHour = taskHour;
+	}
+
+	/**Sets Task priority strictly for testing
+	 * 
+	 * @param taskPriority the priority being set
+	 */
+	public void setTaskPriority(ObjectProperty<TaskPriority> taskPriority) {
+		this.taskPriority = taskPriority;
+	}
+
+	/**Sets Task list strictly for testing
+	 * 
+	 * @param taskList the list of last being set
+	 */
+	public void setTaskList(ListProperty<Task> taskList) {
+		this.taskList = taskList;
+	}
+
+	/**Sets Task strictly for testing
+	 * 
+	 * @param selectedTask the task being set
+	 */
+	public void setSelectedTask(ObjectProperty<Task> selectedTask) {
+		this.selectedTask = selectedTask;
+	}
+
+	/**Sets Task sorting comparator strictly for testing
+	 * 
+	 * @param taskSortingComparator sorting comparator being set
+	 */
+	public void setTaskSortingComparator(ObjectProperty<Comparator<Task>> taskSortingComparator) {
+		this.taskSortingComparator = taskSortingComparator;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/**
+	 * Above is for testing purposes
+	 */
 }
