@@ -2,6 +2,8 @@ package edu.westga.cs1302.todo_list.viewmodel;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
+
 import edu.westga.cs1302.todo_list.model.PriorityComparator;
 import edu.westga.cs1302.todo_list.model.Task;
 import edu.westga.cs1302.todo_list.model.TaskPriority;
@@ -282,5 +284,5 @@ public class MainWindowViewModel {
 	
 	/**
 	 * Above is for testing purposes
-	 */
+	 */	
 }

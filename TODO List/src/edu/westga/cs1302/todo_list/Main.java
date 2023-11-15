@@ -16,6 +16,8 @@ import javafx.stage.Stage;
 public class Main extends Application {
 	private static final String WINDOW_TITLE = "TODO List";
 	private static final String GUI_RESOURCE = "view/MainWindow.fxml";
+	public static final String ADD_TASK_TITLE = "AddTask";
+	public static final String ADD_TASK_DIALOG = "view/CreateTaskWindow.fxml";
 
 	/**
 	 * JavaFX entry point.

@@ -6,8 +6,12 @@ import edu.westga.cs1302.todo_list.model.TaskPriority;
 import edu.westga.cs1302.todo_list.viewmodel.CreateTaskViewModel;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.SimpleListProperty;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
@@ -74,19 +78,14 @@ public class CreateTaskWindow {
      * 
      */
     public void bindingViewModel() {
-    	//this.addTask.disableProperty().bind(this.title.textProperty().isEmpty());
-    	
-    	//this.addTask.disableProperty().set(true);
     	BooleanBinding disableAddTaskButton = Bindings.or(this.title.textProperty().isEmpty(), this.description.textProperty().isEmpty().or(this.hours.itemsProperty().isNull().or(this.priority.itemsProperty().isNull())));
 		this.addTask.disableProperty().bind(disableAddTaskButton);
-    	
-		BooleanBinding disableAddSubTaskButton = Bindings.or(this.title.textProperty().isEmpty(), this.description.textProperty().isEmpty().or(this.hours.itemsProperty().isNull().or(this.priority.itemsProperty().isNull().or(this.selectTask.itemsProperty().isNull()))));
+		BooleanBinding disableAddSubTaskButton = Bindings.or(this.title.textProperty().isEmpty(), this.description.textProperty().isEmpty().or(this.hours.itemsProperty().isNull().or(this.priority.itemsProperty().isNull().or(this.selectTask.selectionModelProperty().isNull()))));
 		this.addSubTask.disableProperty().bind(disableAddSubTaskButton);
-
+		this.selectTask.itemsProperty().bind(this.vm.getTaskList());
     	this.hours.itemsProperty().bind(this.vm.getHoursList());
 		this.hours.setValue(this.vm.getHoursList().getValue().get(0));
-		this.selectTask.itemsProperty().bind(this.vm.getTaskList());
-		//getSelectedTaskComboBox
+		//this.selectTask.itemsProperty().bind(this.vm.getTaskList());
 		this.priority.itemsProperty().bind(this.vm.getPriorityList());
 		this.priority.setValue(this.vm.getPriorityList().getValue().get(0));
 		this.title.textProperty().bindBidirectional(this.vm.getTaskTitle());
@@ -95,4 +94,18 @@ public class CreateTaskWindow {
 		this.vm.getTaskPriority().bind(this.priority.getSelectionModel().selectedItemProperty());
 		this.vm.getSelectedTask().bind(this.selectTask.getSelectionModel().selectedItemProperty());
     }
+    
+    public boolean setTaskList(ObservableList<Task> tasks) {
+		if (tasks == null) {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setContentText("Unable to acess task list");
+			alert.showAndWait();
+			return false;
+		} else {
+			ListProperty<Task> newTaskList = new SimpleListProperty<Task>();
+			newTaskList.addAll(tasks);
+			this.vm.setTaskList(newTaskList);
+			return true;
+		}
+	}
 }

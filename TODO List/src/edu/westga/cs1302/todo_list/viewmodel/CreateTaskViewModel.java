@@ -49,7 +49,10 @@ public class CreateTaskViewModel {
 	public void addTask() {
 		try {
 			Task newTask = new Task(this.taskTitle.getValue(), this.taskDescription.getValue(), this.taskHour.getValue(), this.taskPriority.getValue());
-			this.taskList.add(newTask);
+			System.out.println("Added kinda");
+			ListProperty<Task> newTaskList = new SimpleListProperty<Task>();
+			newTaskList.add(newTask);
+			this.setTaskList(newTaskList);
 			
 		} catch (NullPointerException e) {
 			Alert alert = new Alert(Alert.AlertType.ERROR);
