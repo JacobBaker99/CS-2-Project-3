@@ -38,41 +38,54 @@ public class MainWindow {
 	
 	@FXML
 	void initialize() {
-		assert this.title != null : "fx:id=\"title\" was not injected: check your FXML file 'MainWindow.fxml'.";
-		assert this.description != null
-				: "fx:id=\"description\" was not injected: check your FXML file 'MainWindow.fxml'.";
-		assert this.hours != null : "fx:id=\"hours\" was not injected: check your FXML file 'MainWindow.fxml'.";
-		assert this.priority != null : "fx:id=\"priority\" was not injected: check your FXML file 'MainWindow.fxml'.";
-		assert this.taskListView != null
-				: "fx:id=\"taskListView\" was not injected: check your FXML file 'MainWindow.fxml'.";
-		this.bindingViewModel();
-		this.addTask.setOnAction((event)-> {
-			this.vm.addTask();
-		});
-		this.addSubTask.setOnAction((event)-> {
-			this.vm.addSubTask();
-		});
+		this.assertInitially();
+        this.bindingViewModel();
+		
+		//Take Out below
+//		this.addTask.setOnAction((event)-> {
+//			this.vm.addTask();
+//		});
+//		this.addSubTask.setOnAction((event)-> {
+//			this.vm.addSubTask();
+//		});
+		//Task out above
+		
 		this.taskListView.setOnMouseClicked((event)-> {
 			this.vm.setSelectedTask(this.taskListView.getSelectionModel().getSelectedItem());
 		});
 	}
 	
+	/**Asserts that the properties all have the proper assigned values
+     * 
+     */
+    public void assertInitially() {
+    	assert this.addSubTask != null : "fx:id=\"addSubTask\" was not injected: check your FXML file 'MainWindow.fxml'.";
+	    assert this.addTask != null : "fx:id=\"addTask\" was not injected: check your FXML file 'MainWindow.fxml'.";
+	    assert this.description != null : "fx:id=\"description\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert this.details != null : "fx:id=\"details\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert this.hours != null : "fx:id=\"hours\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert this.priority != null : "fx:id=\"priority\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert this.taskListView != null : "fx:id=\"taskListView\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert this.taskOrder != null : "fx:id=\"taskOrder\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert this.title != null : "fx:id=\"title\" was not injected: check your FXML file 'MainWindow.fxml'.";
+    }
+	
 	/**Binds the view model with the view
 	 * 
 	 */
 	public void bindingViewModel() {
-		this.hours.itemsProperty().bind(this.vm.getHoursList());
-		this.hours.setValue(this.vm.getHoursList().getValue().get(0));
-		this.priority.itemsProperty().bind(this.vm.getPriorityList());
-		this.priority.setValue(this.vm.getPriorityList().getValue().get(0));
+//		this.hours.itemsProperty().bind(this.vm.getHoursList());
+//		this.hours.setValue(this.vm.getHoursList().getValue().get(0));
+//		this.priority.itemsProperty().bind(this.vm.getPriorityList());
+//		this.priority.setValue(this.vm.getPriorityList().getValue().get(0));
 		this.taskOrder.itemsProperty().bind(this.vm.getSortingComparatorList());
 		this.taskOrder.setValue(this.vm.getSortingComparatorList().getValue().get(0));
 		this.taskListView.itemsProperty().bindBidirectional(this.vm.getTaskList());
 		this.details.textProperty().bind(this.vm.getDeatails());
-		this.title.textProperty().bindBidirectional(this.vm.getTaskTitle());
-		this.description.textProperty().bindBidirectional(this.vm.getTaskDescription());
-		this.vm.getTaskHour().bind(this.hours.getSelectionModel().selectedItemProperty());
-		this.vm.getTaskPriority().bind(this.priority.getSelectionModel().selectedItemProperty());
+//		this.title.textProperty().bindBidirectional(this.vm.getTaskTitle());
+//		this.description.textProperty().bindBidirectional(this.vm.getTaskDescription());
+//		this.vm.getTaskHour().bind(this.hours.getSelectionModel().selectedItemProperty());
+//		this.vm.getTaskPriority().bind(this.priority.getSelectionModel().selectedItemProperty());
 		this.vm.getTaskSortingComparator().bind(this.taskOrder.getSelectionModel().selectedItemProperty());
 		
 		this.vm.getSelectedTask().bind(this.taskListView.getSelectionModel().selectedItemProperty());
