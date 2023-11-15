@@ -4,6 +4,8 @@ import java.util.ResourceBundle;
 import edu.westga.cs1302.todo_list.model.Task;
 import edu.westga.cs1302.todo_list.model.TaskPriority;
 import edu.westga.cs1302.todo_list.viewmodel.CreateTaskViewModel;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -72,8 +74,18 @@ public class CreateTaskWindow {
      * 
      */
     public void bindingViewModel() {
+    	//this.addTask.disableProperty().bind(this.title.textProperty().isEmpty());
+    	
+    	//this.addTask.disableProperty().set(true);
+    	BooleanBinding disableAddTaskButton = Bindings.or(this.title.textProperty().isEmpty(), this.description.textProperty().isEmpty().or(this.hours.itemsProperty().isNull().or(this.priority.itemsProperty().isNull())));
+		this.addTask.disableProperty().bind(disableAddTaskButton);
+    	
+		BooleanBinding disableAddSubTaskButton = Bindings.or(this.title.textProperty().isEmpty(), this.description.textProperty().isEmpty().or(this.hours.itemsProperty().isNull().or(this.priority.itemsProperty().isNull().or(this.selectTask.itemsProperty().isNull()))));
+		this.addSubTask.disableProperty().bind(disableAddSubTaskButton);
+
     	this.hours.itemsProperty().bind(this.vm.getHoursList());
 		this.hours.setValue(this.vm.getHoursList().getValue().get(0));
+		this.selectTask.itemsProperty().bind(this.vm.getTaskList());
 		//getSelectedTaskComboBox
 		this.priority.itemsProperty().bind(this.vm.getPriorityList());
 		this.priority.setValue(this.vm.getPriorityList().getValue().get(0));
@@ -81,5 +93,6 @@ public class CreateTaskWindow {
 		this.description.textProperty().bindBidirectional(this.vm.getTaskDescription());
 		this.vm.getTaskHour().bind(this.hours.getSelectionModel().selectedItemProperty());
 		this.vm.getTaskPriority().bind(this.priority.getSelectionModel().selectedItemProperty());
+		this.vm.getSelectedTask().bind(this.selectTask.getSelectionModel().selectedItemProperty());
     }
 }
