@@ -19,13 +19,6 @@ public class DetailWindowViewModel {
 	public DetailWindowViewModel() {
 		this.deatails = new SimpleStringProperty("");
 	}
-	
-	//public void updateDetail() {
-		//System.out.println(this.selectedTask.toString());
-		//System.out.println(this.selectedTask.get().getFullDetails());
-		//System.out.println(this.selectedTask.getValue().getFullDetails());
-		//this.deatails = new SimpleStringProperty();
-	//}
 
 	/**Gets task details
 	 * 
@@ -47,7 +40,6 @@ public class DetailWindowViewModel {
 			alert.showAndWait();
 			return false;
 		} else {
-			System.out.println();
 			this.deatails.set(tasks.getFullDetails());
 			return true;
 		}

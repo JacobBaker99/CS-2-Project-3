@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import edu.westga.cs1302.todo_list.model.TaskPriority;
 import edu.westga.cs1302.todo_list.viewmodel.CreateTaskViewModel;
 
-public class TestConstructor {
+public class TestConstructorCTW {
 
 	@Test
 	void testMainWindowViewModelConstructorValues() {

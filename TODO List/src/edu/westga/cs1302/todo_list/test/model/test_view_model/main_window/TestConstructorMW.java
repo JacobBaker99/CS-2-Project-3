@@ -13,7 +13,7 @@ import edu.westga.cs1302.todo_list.viewmodel.MainWindowViewModel;
  * @author Jacob Baker
  * @version Fall 2023
  */
-public class TestMainWindowViewModelConstuctor {
+public class TestConstructorMW {
 
 	@Test
 	void testMainWindowViewModelConstructorValues() {
@@ -26,8 +26,6 @@ public class TestMainWindowViewModelConstuctor {
 		assertEquals(new PriorityComparator().toString(), vm.getSortingComparatorList().getValue().get(0).toString(), "checks the priority comparator list index 0");
 		assertEquals(new TimeToCompleteComparator().toString(), vm.getSortingComparatorList().getValue().get(1).toString(), "checks the priority comparator list index 1");
 		
-		assertEquals(new PriorityComparator().toString(), vm.getTaskSortingComparator().getValue().toString(), "checks the selected comparator assignded to priority");
-		
-		assertEquals("", vm.getDeatails().getValue(), "checks that the details is empty");	
+		assertEquals(new PriorityComparator().toString(), vm.getTaskSortingComparator().getValue().toString(), "checks the selected comparator assignded to priority");	
 	}
 }
