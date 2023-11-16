@@ -1,10 +1,10 @@
-package edu.westga.cs1302.todo_list.test.model.test_view_model.main_window;
+package edu.westga.cs1302.todo_list.test.model.test_view_model.create_task_window;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 import edu.westga.cs1302.todo_list.model.TaskPriority;
-import edu.westga.cs1302.todo_list.viewmodel.MainWindowViewModel;
+import edu.westga.cs1302.todo_list.viewmodel.CreateTaskViewModel;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -14,11 +14,11 @@ import javafx.beans.property.SimpleStringProperty;
  * @version Fall 2023
  * 
  */
-public class TestMainWindowViewModelAddingTaskToTaskList {
+public class TestAddingTaskToTaskList {
 
 	@Test
 	public void testAddingOneTaskToList() {
-		MainWindowViewModel vm = new MainWindowViewModel();
+		CreateTaskViewModel vm = new CreateTaskViewModel();
 		
 		vm.setTaskTitle(new SimpleStringProperty("tit"));
 		vm.setTaskDescription(new SimpleStringProperty("des"));
@@ -37,7 +37,7 @@ public class TestMainWindowViewModelAddingTaskToTaskList {
 	
 	@Test
 	public void testAddingMultipleTaskToList() {
-		MainWindowViewModel vm = new MainWindowViewModel();
+		CreateTaskViewModel vm = new CreateTaskViewModel();
 		
 		vm.setTaskTitle(new SimpleStringProperty("tit"));
 		vm.setTaskDescription(new SimpleStringProperty("des"));
@@ -86,7 +86,7 @@ public class TestMainWindowViewModelAddingTaskToTaskList {
 	
 	@Test
 	public void testAddingNothingToList() {
-		MainWindowViewModel vm = new MainWindowViewModel();
+		CreateTaskViewModel vm = new CreateTaskViewModel();
 		assertThrows(ExceptionInInitializerError.class, ()->{vm.addTask();});	
 	}
 }

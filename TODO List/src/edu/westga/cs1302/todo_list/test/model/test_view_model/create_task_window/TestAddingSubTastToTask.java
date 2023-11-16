@@ -1,9 +1,11 @@
-package edu.westga.cs1302.todo_list.test.model.test_view_model.main_window;
+package edu.westga.cs1302.todo_list.test.model.test_view_model.create_task_window;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+
+import edu.westga.cs1302.todo_list.model.Task;
 import edu.westga.cs1302.todo_list.model.TaskPriority;
-import edu.westga.cs1302.todo_list.viewmodel.MainWindowViewModel;
+import edu.westga.cs1302.todo_list.viewmodel.CreateTaskViewModel;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -16,7 +18,7 @@ class TestAddingSubTastToTask {
 	
 	@Test
 	public void addingSubTaskToNoTaskSelected() {
-		MainWindowViewModel vm = new MainWindowViewModel();
+		CreateTaskViewModel vm = new CreateTaskViewModel();
 		// below For Main Task
 		vm.setTaskTitle(new SimpleStringProperty("tit"));
 		vm.setTaskDescription(new SimpleStringProperty("des"));
@@ -36,7 +38,7 @@ class TestAddingSubTastToTask {
 	
 	@Test
 	void testAddingOneSubTaskToOneTask() {
-		MainWindowViewModel vm = new MainWindowViewModel();
+		CreateTaskViewModel vm = new CreateTaskViewModel();
 		// below For Main Task
 		vm.setTaskTitle(new SimpleStringProperty("tit"));
 		vm.setTaskDescription(new SimpleStringProperty("des"));
@@ -49,7 +51,7 @@ class TestAddingSubTastToTask {
 		vm.setTaskDescription(new SimpleStringProperty("subdes"));
 		vm.setTaskHour(new SimpleObjectProperty<Integer>(1));
 		vm.setTaskPriority(new SimpleObjectProperty<TaskPriority>(TaskPriority.LOW));
-		vm.setSelectedTask(vm.getTaskList().getValue().get(0));
+		vm.setSelectedTask(new SimpleObjectProperty<Task>(vm.getTaskList().getValue().get(0)));
 		vm.addSubTask();
 		// above For Sub Task
 
@@ -71,7 +73,7 @@ class TestAddingSubTastToTask {
 	
 	@Test
 	void testAddingOneSubTaskToMultipleTask() {
-		MainWindowViewModel vm = new MainWindowViewModel();
+		CreateTaskViewModel vm = new CreateTaskViewModel();
 		// below For Main Task
 		vm.setTaskTitle(new SimpleStringProperty("tit"));
 		vm.setTaskDescription(new SimpleStringProperty("des"));
@@ -84,7 +86,7 @@ class TestAddingSubTastToTask {
 		vm.setTaskDescription(new SimpleStringProperty("subdes"));
 		vm.setTaskHour(new SimpleObjectProperty<Integer>(1));
 		vm.setTaskPriority(new SimpleObjectProperty<TaskPriority>(TaskPriority.LOW));
-		vm.setSelectedTask(vm.getTaskList().getValue().get(0));
+		vm.setSelectedTask(new SimpleObjectProperty<Task>(vm.getTaskList().getValue().get(0)));
 		vm.addSubTask();
 		// above For Sub Task
 		
@@ -100,7 +102,7 @@ class TestAddingSubTastToTask {
 		vm.setTaskDescription(new SimpleStringProperty("subdes2"));
 		vm.setTaskHour(new SimpleObjectProperty<Integer>(1));
 		vm.setTaskPriority(new SimpleObjectProperty<TaskPriority>(TaskPriority.LOW));
-		vm.setSelectedTask(vm.getTaskList().getValue().get(1));
+		vm.setSelectedTask(new SimpleObjectProperty<Task>(vm.getTaskList().getValue().get(1)));
 		vm.addSubTask();
 
 		assertEquals(2, vm.getTaskList().getSize(), "testing the size of list");
@@ -138,7 +140,7 @@ class TestAddingSubTastToTask {
 	
 	@Test
 	void testAddingMultipleSubTaskToOneTask() {
-		MainWindowViewModel vm = new MainWindowViewModel();
+		CreateTaskViewModel vm = new CreateTaskViewModel();
 		// below For Main Task
 		vm.setTaskTitle(new SimpleStringProperty("tit"));
 		vm.setTaskDescription(new SimpleStringProperty("des"));
@@ -151,19 +153,19 @@ class TestAddingSubTastToTask {
 		vm.setTaskDescription(new SimpleStringProperty("subdes"));
 		vm.setTaskHour(new SimpleObjectProperty<Integer>(1));
 		vm.setTaskPriority(new SimpleObjectProperty<TaskPriority>(TaskPriority.LOW));
-		vm.setSelectedTask(vm.getTaskList().getValue().get(0));
+		vm.setSelectedTask(new SimpleObjectProperty<Task>(vm.getTaskList().getValue().get(0)));
 		vm.addSubTask();
 		vm.setTaskTitle(new SimpleStringProperty("subtitb"));
 		vm.setTaskDescription(new SimpleStringProperty("subdesb"));
 		vm.setTaskHour(new SimpleObjectProperty<Integer>(1));
 		vm.setTaskPriority(new SimpleObjectProperty<TaskPriority>(TaskPriority.LOW));
-		vm.setSelectedTask(vm.getTaskList().getValue().get(0));
+		vm.setSelectedTask(new SimpleObjectProperty<Task>(vm.getTaskList().getValue().get(0)));
 		vm.addSubTask();
 		vm.setTaskTitle(new SimpleStringProperty("subtitc"));
 		vm.setTaskDescription(new SimpleStringProperty("subdesc"));
 		vm.setTaskHour(new SimpleObjectProperty<Integer>(1));
 		vm.setTaskPriority(new SimpleObjectProperty<TaskPriority>(TaskPriority.LOW));
-		vm.setSelectedTask(vm.getTaskList().getValue().get(0));
+		vm.setSelectedTask(new SimpleObjectProperty<Task>(vm.getTaskList().getValue().get(0)));
 		vm.addSubTask();
 		// above For Sub Task
 		
@@ -199,7 +201,7 @@ class TestAddingSubTastToTask {
 	
 	@Test
 	void testAddingMultipleSubTaskToMultipleTask() {
-		MainWindowViewModel vm = new MainWindowViewModel();
+		CreateTaskViewModel vm = new CreateTaskViewModel();
 		// below For Main Task
 		vm.setTaskTitle(new SimpleStringProperty("tit"));
 		vm.setTaskDescription(new SimpleStringProperty("des"));
@@ -212,19 +214,20 @@ class TestAddingSubTastToTask {
 		vm.setTaskDescription(new SimpleStringProperty("subdes"));
 		vm.setTaskHour(new SimpleObjectProperty<Integer>(1));
 		vm.setTaskPriority(new SimpleObjectProperty<TaskPriority>(TaskPriority.LOW));
-		vm.setSelectedTask(vm.getTaskList().getValue().get(0));
+		vm.setSelectedTask(null);
+		vm.setSelectedTask(new SimpleObjectProperty<Task>(vm.getTaskList().getValue().get(0)));
 		vm.addSubTask();
 		vm.setTaskTitle(new SimpleStringProperty("subtitb"));
 		vm.setTaskDescription(new SimpleStringProperty("subdesb"));
 		vm.setTaskHour(new SimpleObjectProperty<Integer>(1));
 		vm.setTaskPriority(new SimpleObjectProperty<TaskPriority>(TaskPriority.LOW));
-		vm.setSelectedTask(vm.getTaskList().getValue().get(0));
+		vm.setSelectedTask(new SimpleObjectProperty<Task>(vm.getTaskList().getValue().get(0)));
 		vm.addSubTask();
 		vm.setTaskTitle(new SimpleStringProperty("subtitc"));
 		vm.setTaskDescription(new SimpleStringProperty("subdesc"));
 		vm.setTaskHour(new SimpleObjectProperty<Integer>(1));
 		vm.setTaskPriority(new SimpleObjectProperty<TaskPriority>(TaskPriority.LOW));
-		vm.setSelectedTask(vm.getTaskList().getValue().get(0));
+		vm.setSelectedTask(new SimpleObjectProperty<Task>(vm.getTaskList().getValue().get(0)));
 		vm.addSubTask();
 		// above For Sub Task
 
@@ -240,19 +243,19 @@ class TestAddingSubTastToTask {
 		vm.setTaskDescription(new SimpleStringProperty("subdes2"));
 		vm.setTaskHour(new SimpleObjectProperty<Integer>(1));
 		vm.setTaskPriority(new SimpleObjectProperty<TaskPriority>(TaskPriority.LOW));
-		vm.setSelectedTask(vm.getTaskList().getValue().get(1));
+		vm.setSelectedTask(new SimpleObjectProperty<Task>(vm.getTaskList().getValue().get(1)));
 		vm.addSubTask();
 		vm.setTaskTitle(new SimpleStringProperty("subtit2b"));
 		vm.setTaskDescription(new SimpleStringProperty("subdes2b"));
 		vm.setTaskHour(new SimpleObjectProperty<Integer>(1));
 		vm.setTaskPriority(new SimpleObjectProperty<TaskPriority>(TaskPriority.LOW));
-		vm.setSelectedTask(vm.getTaskList().getValue().get(1));
+		vm.setSelectedTask(new SimpleObjectProperty<Task>(vm.getTaskList().getValue().get(1)));
 		vm.addSubTask();
 		vm.setTaskTitle(new SimpleStringProperty("subtit2c"));
 		vm.setTaskDescription(new SimpleStringProperty("subdes2c"));
 		vm.setTaskHour(new SimpleObjectProperty<Integer>(1));
 		vm.setTaskPriority(new SimpleObjectProperty<TaskPriority>(TaskPriority.LOW));
-		vm.setSelectedTask(vm.getTaskList().getValue().get(1));
+		vm.setSelectedTask(new SimpleObjectProperty<Task>(vm.getTaskList().getValue().get(1)));
 		vm.addSubTask();
 		//Above for sub task
 
