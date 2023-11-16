@@ -52,6 +52,9 @@ public class MainWindow {
 		});
 	}
 	
+	/**Made to create a CreateTaskWindow 
+	 * 
+	 */
 	public void createCreateTaskWindow() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
