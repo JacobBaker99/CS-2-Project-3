@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import edu.westga.cs1302.todo_list.model.PriorityComparator;
-import edu.westga.cs1302.todo_list.model.Task;
 import edu.westga.cs1302.todo_list.model.TaskPriority;
 
 class TestComparePriority {

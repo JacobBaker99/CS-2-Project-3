@@ -7,6 +7,11 @@ import org.junit.jupiter.api.Test;
 import edu.westga.cs1302.todo_list.model.TaskPriority;
 import edu.westga.cs1302.todo_list.viewmodel.CreateTaskViewModel;
 
+/**Test the constructor for CreateTaskWindow
+ * 
+ * @author Jacob Baker
+ * @version Fall 2023
+ */
 public class TestConstructorCTW {
 
 	@Test
