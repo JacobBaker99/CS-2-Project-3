@@ -1,5 +1,6 @@
 package edu.westga.cs1302.todo_list.view;
 
+import javafx.beans.property.SimpleListProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,17 +10,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.util.Comparator;
-
 import edu.westga.cs1302.todo_list.Main;
-
 import edu.westga.cs1302.todo_list.model.Task;
-import edu.westga.cs1302.todo_list.model.TaskPriority;
 import edu.westga.cs1302.todo_list.viewmodel.MainWindowViewModel;
 
 /**
@@ -33,7 +29,7 @@ public class MainWindow {
 	@FXML private TextArea details;
 	@FXML private ComboBox<Comparator<Task>> taskOrder;
 	@FXML private Button createTask;
-	
+
 	private MainWindowViewModel vm;
 
 	/**The constructor of MainWindow
@@ -67,7 +63,6 @@ public class MainWindow {
 					addTaskStage.showAndWait();
 					this.vm.updateDisplay();
 				}
-				
 			} catch (IOException e) {
 				Alert alert = new Alert(Alert.AlertType.ERROR);
 				alert.setContentText(e.getMessage());
@@ -76,16 +71,20 @@ public class MainWindow {
 		});
 	}
 	
-	/**Asserts that the properties all have the proper assigned values
-     * 
-     */
-    public void assertInitially() {
-    	 assert this.createTask != null : "fx:id=\"createTask\" was not injected: check your FXML file 'MainWindow.fxml'.";
-         assert this.details != null : "fx:id=\"details\" was not injected: check your FXML file 'MainWindow.fxml'.";
-         assert this.taskListView != null : "fx:id=\"taskListView\" was not injected: check your FXML file 'MainWindow.fxml'.";
-         assert this.taskOrder != null : "fx:id=\"taskOrder\" was not injected: check your FXML file 'MainWindow.fxml'.";
-    }
-	
+	/**
+	 * Asserts that the properties all have the proper assigned values
+	 * 
+	 */
+	public void assertInitially() {
+		assert this.createTask != null
+				: "fx:id=\"createTask\" was not injected: check your FXML file 'MainWindow.fxml'.";
+		assert this.details != null : "fx:id=\"details\" was not injected: check your FXML file 'MainWindow.fxml'.";
+		assert this.taskListView != null
+				: "fx:id=\"taskListView\" was not injected: check your FXML file 'MainWindow.fxml'.";
+		assert this.taskOrder != null : "fx:id=\"taskOrder\" was not injected: check your FXML file 'MainWindow.fxml'.";
+		new SimpleListProperty<Task>();
+	}
+
 	/**Binds the view model with the view
 	 * 
 	 */
@@ -96,5 +95,5 @@ public class MainWindow {
 		this.details.textProperty().bind(this.vm.getDeatails());
 		this.vm.getTaskSortingComparator().bind(this.taskOrder.getSelectionModel().selectedItemProperty());
 		this.vm.getSelectedTask().bind(this.taskListView.getSelectionModel().selectedItemProperty());
-	}
+	}		
 }

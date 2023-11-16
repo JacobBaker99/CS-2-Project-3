@@ -1,4 +1,5 @@
 package edu.westga.cs1302.todo_list.view;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 import edu.westga.cs1302.todo_list.model.Task;
@@ -6,11 +7,8 @@ import edu.westga.cs1302.todo_list.model.TaskPriority;
 import edu.westga.cs1302.todo_list.viewmodel.CreateTaskViewModel;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ListProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleListProperty;
-import javafx.beans.value.ObservableBooleanValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -79,30 +77,19 @@ public class CreateTaskWindow {
         assert this.title != null : "fx:id=\"title\" was not injected: check your FXML file 'CreateTaskWindow.fxml'.";
     }
     
-    private BooleanProperty checkIfNullSelected() {
-    	SimpleBooleanProperty returnType = new SimpleBooleanProperty(true);
-    	if (this.selectTask.selectionModelProperty().getValue() == null) {
-    		returnType = new SimpleBooleanProperty(false);
-    		return returnType;
-    	} else {
-    		return returnType;
-    	}
-    }
-    
     /**Binds the view model with the view
      * 
      */
     public void bindingViewModel() {
     	BooleanBinding disableAddTaskButton = Bindings.or(this.title.textProperty().isEmpty(), this.description.textProperty().isEmpty().or(this.hours.itemsProperty().isNull().or(this.priority.itemsProperty().isNull())));
 		this.addTask.disableProperty().bind(disableAddTaskButton);
-		BooleanBinding disableAddSubTaskButton = Bindings.or(this.title.textProperty().isEmpty(), this.description.textProperty().isEmpty().or(this.hours.itemsProperty().isNull().or(this.priority.itemsProperty().isNull().or(this.checkIfNullSelected()))));
+		BooleanBinding disableAddSubTaskButton = Bindings.or(this.title.textProperty().isEmpty(), this.description.textProperty().isEmpty().or(this.hours.itemsProperty().isNull().or(this.priority.itemsProperty().isNull().or(this.selectTask.itemsProperty().isNull()))));
 		this.addSubTask.disableProperty().bind(disableAddSubTaskButton);
 		this.selectTask.itemsProperty().bind(this.vm.getTaskList());
     	this.hours.itemsProperty().bind(this.vm.getHoursList());
-		this.hours.setValue(this.vm.getHoursList().getValue().get(0));
-		//this.selectTask.itemsProperty().bind(this.vm.getTaskList());
+		this.hours.setValue(this.vm.getTaskHour().getValue());
 		this.priority.itemsProperty().bind(this.vm.getPriorityList());
-		this.priority.setValue(this.vm.getPriorityList().getValue().get(0));
+		this.priority.setValue(this.vm.getTaskPriority().getValue());
 		this.title.textProperty().bindBidirectional(this.vm.getTaskTitle());
 		this.description.textProperty().bindBidirectional(this.vm.getTaskDescription());
 		this.vm.getTaskHour().bind(this.hours.getSelectionModel().selectedItemProperty());
@@ -110,6 +97,13 @@ public class CreateTaskWindow {
 		this.vm.getSelectedTask().bind(this.selectTask.getSelectionModel().selectedItemProperty());
     }
     
+    /**sets the task list in ViewModel
+     * 
+     * @param tasks the list of task being passed in
+     * @return boolean to the MainWindow letting it know if it worked
+     */
+    
+    //TODO Move to ViewModel with a call here
     public boolean setTaskList(ObservableList<Task> tasks) {
 		if (tasks == null) {
 			Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -118,7 +112,8 @@ public class CreateTaskWindow {
 			return false;
 		} else {
 			ListProperty<Task> newTaskList = new SimpleListProperty<Task>();
-			newTaskList.addAll(tasks);
+			//newTaskList.addAll(tasks);
+			newTaskList.set(tasks);
 			this.vm.setTaskList(newTaskList);
 			return true;
 		}

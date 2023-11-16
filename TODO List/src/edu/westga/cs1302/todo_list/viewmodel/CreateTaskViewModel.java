@@ -49,11 +49,7 @@ public class CreateTaskViewModel {
 	public void addTask() {
 		try {
 			Task newTask = new Task(this.taskTitle.getValue(), this.taskDescription.getValue(), this.taskHour.getValue(), this.taskPriority.getValue());
-			System.out.println("Added kinda");
-			ListProperty<Task> newTaskList = new SimpleListProperty<Task>();
-			newTaskList.add(newTask);
-			this.setTaskList(newTaskList);
-			
+			this.taskList.add(newTask);
 		} catch (NullPointerException e) {
 			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.setContentText(e.getMessage());
@@ -193,7 +189,7 @@ public class CreateTaskViewModel {
 	 * @param taskList the list of last being set
 	 */
 	public void setTaskList(ListProperty<Task> taskList) {
-		this.taskList = taskList;
+		this.taskList.set(taskList);
 	}
 
 	/**Sets Task strictly for testing

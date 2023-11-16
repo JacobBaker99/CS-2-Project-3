@@ -48,6 +48,14 @@ public class MainWindowViewModel {
 		this.priorityList.addAll(TaskPriority.HIGH, TaskPriority.MEDIUM, TaskPriority.LOW);
 		this.taskPriority = new SimpleObjectProperty<TaskPriority>(this.priorityList.get(0));
 		this.taskList = new SimpleListProperty<Task>(FXCollections.observableArrayList(new ArrayList<Task>()));
+		Task theTask = new Task("tt", "dd", 3, TaskPriority.MEDIUM);
+		this.taskList.add(theTask);
+		
+		
+		
+		
+		
+		
 		this.selectedTask = new SimpleObjectProperty<Task>();
 		this.sortingComparatorList = new SimpleListProperty<Comparator<Task>>(FXCollections.observableArrayList(new ArrayList<Comparator<Task>>()));
 		this.sortingComparatorList.add(new PriorityComparator());
