@@ -48,28 +48,37 @@ public class MainWindow {
 			this.vm.setSelectedTask(this.taskListView.getSelectionModel().getSelectedItem());
 		});
 		this.createTask.setOnAction((event)-> {
-			try {
-				FXMLLoader loader = new FXMLLoader();
-				loader.setLocation(Main.class.getResource(Main.ADD_TASK_DIALOG));
-				loader.load();
-				Parent parent = loader.getRoot();
-				Scene scene = new Scene(parent);
-				Stage addTaskStage = new Stage();
-				addTaskStage.setTitle(Main.ADD_TASK_TITLE);
-				addTaskStage.setScene(scene);
-				addTaskStage.initModality(Modality.APPLICATION_MODAL);
-				CreateTaskWindow controller = (CreateTaskWindow) loader.getController();
-				if (controller.setTaskListCreateTask(this.taskListView.getItems())) {
-					addTaskStage.showAndWait();
-					this.vm.updateDisplay();
-				}
-			} catch (IOException e) {
-				Alert alert = new Alert(Alert.AlertType.ERROR);
-				alert.setContentText(e.getMessage());
-				alert.showAndWait();
-			}
+			this.createCreateTaskWindow();
 		});
 	}
+	
+	public void createCreateTaskWindow() {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Main.class.getResource(Main.ADD_TASK_DIALOG));
+			loader.load();
+			Parent parent = loader.getRoot();
+			Scene scene = new Scene(parent);
+			Stage addTaskStage = new Stage();
+			addTaskStage.setTitle(Main.ADD_TASK_TITLE);
+			addTaskStage.setScene(scene);
+			addTaskStage.initModality(Modality.APPLICATION_MODAL);
+			CreateTaskWindow controller = (CreateTaskWindow) loader.getController();
+			if (controller.setTaskListCreateTask(this.taskListView.getItems())) {
+				addTaskStage.showAndWait();
+				this.vm.updateDisplay();
+			}
+		} catch (IOException e) {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setContentText(e.getMessage());
+			alert.showAndWait();
+		}
+	}
+	
+	
+	
+	
+	
 	
 	/**
 	 * Asserts that the properties all have the proper assigned values
