@@ -7,8 +7,8 @@
 
 <AnchorPane minHeight="366.0" minWidth="267.0" prefHeight="399.0" prefWidth="267.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs1302.todo_list.view.DetailWindow">
    <children>
-      <Label layoutX="102.0" layoutY="14.0" text="Task Details" />
-      <TextArea fx:id="details" layoutX="14.0" layoutY="31.0" prefHeight="324.0" prefWidth="240.0" />
       <Button fx:id="close" layoutX="111.0" layoutY="360.0" mnemonicParsing="false" text="Close" />
+      <Label layoutX="102.0" layoutY="14.0" text="Task Details" />
+      <TextArea fx:id="details" editable="false" layoutX="14.0" layoutY="31.0" prefHeight="324.0" prefWidth="240.0" />
    </children>
 </AnchorPane>

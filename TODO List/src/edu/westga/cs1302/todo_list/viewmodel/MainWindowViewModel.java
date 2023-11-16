@@ -9,12 +9,11 @@ import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.scene.control.Alert;
 
-/**The ViewModel for MainWidow
+/**
+ * The ViewModel for MainWidow
  * 
  * @author Jacob Baker
  * @version Fall 2023
@@ -24,22 +23,25 @@ public class MainWindowViewModel {
 	private ObjectProperty<Task> selectedTask;
 	private ListProperty<Comparator<Task>> sortingComparatorList;
 	private ObjectProperty<Comparator<Task>> taskSortingComparator;
-	private StringProperty deatails;
-	
-	/**The constructor to initialize the values and properties
+
+	/**
+	 * The constructor to initialize the values and properties
 	 * 
 	 */
 	public MainWindowViewModel() {
 		this.taskList = new SimpleListProperty<Task>(FXCollections.observableArrayList(new ArrayList<Task>()));
 		this.selectedTask = new SimpleObjectProperty<Task>();
-		this.sortingComparatorList = new SimpleListProperty<Comparator<Task>>(FXCollections.observableArrayList(new ArrayList<Comparator<Task>>()));
+		this.sortingComparatorList = new SimpleListProperty<Comparator<Task>>(
+				FXCollections.observableArrayList(new ArrayList<Comparator<Task>>()));
 		this.sortingComparatorList.add(new PriorityComparator());
 		this.sortingComparatorList.add(new TimeToCompleteComparator());
-		this.taskSortingComparator = new SimpleObjectProperty<Comparator<Task>>(this.sortingComparatorList.getValue().get(0));
-		this.deatails = new SimpleStringProperty("");
+		this.taskSortingComparator = new SimpleObjectProperty<Comparator<Task>>(
+				this.sortingComparatorList.getValue().get(0));
 	}
 
-	/**This will sort the list and assign the detail of the selected task if not null
+	/**
+	 * This will sort the list and assign the detail of the selected task if not
+	 * null
 	 * 
 	 */
 	public void updateDisplay() {
@@ -54,12 +56,10 @@ public class MainWindowViewModel {
 			alert.setContentText(e.getMessage());
 			alert.showAndWait();
 		}
-		if (this.selectedTask.getValue() != null) {
-			this.deatails.set(this.selectedTask.getValue().getFullDetails());
-		}
 	}
-	
-	/**This allows the codebehind to pass a clicked value through to the view model
+
+	/**
+	 * This allows the codebehind to pass a clicked value through to the view model
 	 * 
 	 * @param taskSelected is the task that was clicked on by the user
 	 */
@@ -68,7 +68,8 @@ public class MainWindowViewModel {
 		this.updateDisplay();
 	}
 
-	/**Gets list of  task
+	/**
+	 * Gets list of task
 	 * 
 	 * @return list of task
 	 */
@@ -76,7 +77,8 @@ public class MainWindowViewModel {
 		return this.taskList;
 	}
 
-	/**Gets task selected
+	/**
+	 * Gets task selected
 	 * 
 	 * @return task slected
 	 */
@@ -84,7 +86,8 @@ public class MainWindowViewModel {
 		return this.selectedTask;
 	}
 
-	/**Gets list of comparators
+	/**
+	 * Gets list of comparators
 	 * 
 	 * @return list of comparators
 	 */
@@ -92,7 +95,8 @@ public class MainWindowViewModel {
 		return this.sortingComparatorList;
 	}
 
-	/**Gets current comparator
+	/**
+	 * Gets current comparator
 	 * 
 	 * @return current comparator
 	 */
@@ -100,15 +104,8 @@ public class MainWindowViewModel {
 		return this.taskSortingComparator;
 	}
 
-	/**Gets task details
-	 * 
-	 * @return task details
-	 */
-	public StringProperty getDeatails() {
-		return this.deatails;
-	}
-
-	/**Sets Task list strictly for testing
+	/**
+	 * Sets Task list of all the task
 	 * 
 	 * @param taskList the list of last being set
 	 */
@@ -116,7 +113,8 @@ public class MainWindowViewModel {
 		this.taskList = taskList;
 	}
 
-	/**Sets Task strictly for testing
+	/**
+	 * Sets selected task
 	 * 
 	 * @param selectedTask the task being set
 	 */
@@ -124,7 +122,8 @@ public class MainWindowViewModel {
 		this.selectedTask = selectedTask;
 	}
 
-	/**Sets Task sorting comparator strictly for testing
+	/**
+	 * Sets Task sorting comparator
 	 * 
 	 * @param taskSortingComparator sorting comparator being set
 	 */

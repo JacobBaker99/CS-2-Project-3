@@ -25,34 +25,39 @@ import edu.westga.cs1302.todo_list.viewmodel.MainWindowViewModel;
  * @version Fall 2023
  */
 public class MainWindow {
-	@FXML private ListView<Task> taskListView;
-	@FXML private TextArea details;
-	@FXML private ComboBox<Comparator<Task>> taskOrder;
-	@FXML private Button createTask;
+	@FXML
+	private ListView<Task> taskListView;
+	@FXML
+	private TextArea details;
+	@FXML
+	private ComboBox<Comparator<Task>> taskOrder;
+	@FXML
+	private Button createTask;
 
 	private MainWindowViewModel vm;
 
-	/**The constructor of MainWindow
+	/**
+	 * The constructor of MainWindow
 	 * 
 	 */
 	public MainWindow() {
 		this.vm = new MainWindowViewModel();
 	}
-	
+
 	@FXML
 	void initialize() {
 		this.assertInitially();
-        this.bindingViewModel();
-        
-		this.taskListView.setOnMouseClicked((event)-> {
+		this.bindingViewModel();
+		this.taskListView.setOnMouseClicked((event) -> {
 			this.createDetailWindow();
 		});
-		this.createTask.setOnAction((event)-> {
+		this.createTask.setOnAction((event) -> {
 			this.createCreateTaskWindow();
 		});
 	}
-	
-	/**Made to create a CreateTaskWindow 
+
+	/**
+	 * Made to create a CreateTaskWindow
 	 * 
 	 */
 	public void createCreateTaskWindow() {
@@ -77,8 +82,9 @@ public class MainWindow {
 			alert.showAndWait();
 		}
 	}
-	
-	/**Made to create a CreateTaskWindow 
+
+	/**
+	 * Made to create a CreateTaskWindow
 	 * 
 	 */
 	public void createDetailWindow() {
@@ -94,7 +100,8 @@ public class MainWindow {
 				addTaskStage.setScene(scene);
 				addTaskStage.initModality(Modality.APPLICATION_MODAL);
 				DetailWindow controller = (DetailWindow) loader.getController();
-				if (controller.setSelectedDetail(this.taskListView.selectionModelProperty().getValue().getSelectedItem())) {
+				if (controller
+						.setSelectedDetail(this.taskListView.selectionModelProperty().getValue().getSelectedItem())) {
 					addTaskStage.showAndWait();
 					this.vm.updateDisplay();
 				}
@@ -105,12 +112,7 @@ public class MainWindow {
 			}
 		}
 	}
-	
-	
-	
-	
-	
-	
+
 	/**
 	 * Asserts that the properties all have the proper assigned values
 	 * 
@@ -125,15 +127,15 @@ public class MainWindow {
 		new SimpleListProperty<Task>();
 	}
 
-	/**Binds the view model with the view
+	/**
+	 * Binds the view model with the view
 	 * 
 	 */
 	public void bindingViewModel() {
 		this.taskOrder.itemsProperty().bind(this.vm.getSortingComparatorList());
 		this.taskOrder.setValue(this.vm.getSortingComparatorList().getValue().get(0));
 		this.taskListView.itemsProperty().bindBidirectional(this.vm.getTaskList());
-		//this.details.textProperty().bind(this.vm.getDeatails());
 		this.vm.getTaskSortingComparator().bind(this.taskOrder.getSelectionModel().selectedItemProperty());
 		this.vm.getSelectedTask().bind(this.taskListView.getSelectionModel().selectedItemProperty());
-	}		
+	}
 }
