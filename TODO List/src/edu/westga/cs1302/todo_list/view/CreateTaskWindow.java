@@ -8,6 +8,7 @@ import edu.westga.cs1302.todo_list.viewmodel.CreateTaskViewModel;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.ListProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -81,9 +82,9 @@ public class CreateTaskWindow {
      * 
      */
     public void bindingViewModel() {
-    	BooleanBinding disableAddTaskButton = Bindings.or(this.title.textProperty().isEmpty(), this.description.textProperty().isEmpty().or(this.hours.itemsProperty().isNull().or(this.priority.itemsProperty().isNull())));
+    	BooleanBinding disableAddTaskButton = Bindings.or(this.title.textProperty().isEmpty(), this.description.textProperty().isEmpty().or(this.hours.getSelectionModel().selectedItemProperty().isNull().or(this.priority.getSelectionModel().selectedItemProperty().isNull())));
 		this.addTask.disableProperty().bind(disableAddTaskButton);
-		BooleanBinding disableAddSubTaskButton = Bindings.or(this.title.textProperty().isEmpty(), this.description.textProperty().isEmpty().or(this.hours.itemsProperty().isNull().or(this.priority.itemsProperty().isNull().or(this.selectTask.itemsProperty().isNull()))));
+		BooleanBinding disableAddSubTaskButton = Bindings.or(this.title.textProperty().isEmpty(), this.description.textProperty().isEmpty().or(this.hours.getSelectionModel().selectedItemProperty().isNull().or(this.priority.getSelectionModel().selectedItemProperty().isNull().or(this.selectTask.getSelectionModel().selectedItemProperty().isNull()))));
 		this.addSubTask.disableProperty().bind(disableAddSubTaskButton);
 		this.selectTask.itemsProperty().bind(this.vm.getTaskList());
     	this.hours.itemsProperty().bind(this.vm.getHoursList());
