@@ -61,7 +61,7 @@ public class DetailWindow {
 	 * @param task the list of task being passed in
 	 * @return boolean to the MainWindow letting it know if it worked
 	 */
-	public boolean setSelectedDetail(Task task) {
+	public boolean setSelectedDetail(Task task) throws NullPointerException, IllegalArgumentException {
 		return this.vm.setDetailForView(task);
 	}
 }

@@ -125,7 +125,7 @@ public class CreateTaskWindow {
 	 * @param tasks the list of task being passed in
 	 * @return boolean to the MainWindow letting it know if it worked
 	 */
-	public boolean setTaskListCreateTask(ObservableList<Task> tasks) {
+	public boolean setTaskListCreateTask(ObservableList<Task> tasks) throws NullPointerException, IllegalArgumentException {
 		return this.vm.setTaskListForView(tasks);
 	}
 }

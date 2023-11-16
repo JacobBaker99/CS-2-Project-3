@@ -130,6 +130,5 @@ public class MainWindowViewModel {
 	 */
 	public void setTaskSortingComparator(ObjectProperty<Comparator<Task>> taskSortingComparator) {
 		this.taskSortingComparator = taskSortingComparator;
-		this.updateDisplay();
 	}
 }

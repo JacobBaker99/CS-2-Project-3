@@ -147,7 +147,6 @@ public class CreateTaskViewModel {
 	public ObjectProperty<Task> getSelectedTask() {
 		return this.selectedTask;
 	}
-
 	
 	/**
 	 * Below is for testing purposes
@@ -214,7 +213,6 @@ public class CreateTaskViewModel {
 			return false;
 		} else {
 			ListProperty<Task> newTaskList = new SimpleListProperty<Task>();
-			//newTaskList.addAll(tasks);
 			newTaskList.set(tasks);
 			this.setTaskList(newTaskList);
 			return true;
