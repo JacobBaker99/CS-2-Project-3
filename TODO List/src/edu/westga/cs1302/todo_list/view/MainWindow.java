@@ -45,7 +45,7 @@ public class MainWindow {
         this.bindingViewModel();
         
 		this.taskListView.setOnMouseClicked((event)-> {
-			this.vm.setSelectedTask(this.taskListView.getSelectionModel().getSelectedItem());
+			this.createDetailWindow();
 		});
 		this.createTask.setOnAction((event)-> {
 			this.createCreateTaskWindow();
@@ -78,6 +78,34 @@ public class MainWindow {
 		}
 	}
 	
+	/**Made to create a CreateTaskWindow 
+	 * 
+	 */
+	public void createDetailWindow() {
+		if ((this.taskListView.selectionModelProperty().getValue().getSelectedItem()) != null) {
+			try {
+				FXMLLoader loader = new FXMLLoader();
+				loader.setLocation(Main.class.getResource(Main.ADD_DETAIL_DIALOG));
+				loader.load();
+				Parent parent = loader.getRoot();
+				Scene scene = new Scene(parent);
+				Stage addTaskStage = new Stage();
+				addTaskStage.setTitle(Main.ADD_DETAIL_TITLE);
+				addTaskStage.setScene(scene);
+				addTaskStage.initModality(Modality.APPLICATION_MODAL);
+				DetailWindow controller = (DetailWindow) loader.getController();
+				if (controller.setSelectedDetail(this.taskListView.selectionModelProperty().getValue().getSelectedItem())) {
+					addTaskStage.showAndWait();
+					this.vm.updateDisplay();
+				}
+			} catch (IOException e) {
+				Alert alert = new Alert(Alert.AlertType.ERROR);
+				alert.setContentText(e.getMessage());
+				alert.showAndWait();
+			}
+		}
+	}
+	
 	
 	
 	
@@ -104,7 +132,7 @@ public class MainWindow {
 		this.taskOrder.itemsProperty().bind(this.vm.getSortingComparatorList());
 		this.taskOrder.setValue(this.vm.getSortingComparatorList().getValue().get(0));
 		this.taskListView.itemsProperty().bindBidirectional(this.vm.getTaskList());
-		this.details.textProperty().bind(this.vm.getDeatails());
+		//this.details.textProperty().bind(this.vm.getDeatails());
 		this.vm.getTaskSortingComparator().bind(this.taskOrder.getSelectionModel().selectedItemProperty());
 		this.vm.getSelectedTask().bind(this.taskListView.getSelectionModel().selectedItemProperty());
 	}		

@@ -2,7 +2,10 @@ package edu.westga.cs1302.todo_list.view;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import edu.westga.cs1302.todo_list.viewmodel.DetailWindowViewModel;
+import edu.westga.cs1302.todo_list.model.Task;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 
@@ -25,22 +28,38 @@ public class DetailWindow {
 
     @FXML
     private TextArea details;
+    
+    private DetailWindowViewModel vm;
 
     @FXML
     void initialize() {
         assert this.close != null : "fx:id=\"close\" was not injected: check your FXML file 'DetailWindow.fxml'.";
         assert this.details != null : "fx:id=\"details\" was not injected: check your FXML file 'DetailWindow.fxml'.";
+        this.vm = new DetailWindowViewModel();
+        this.bindingDetailsWindow();
+        //this.vm.updateDetail();
+        this.close.setOnAction((event)-> {
+			((Node) (event.getSource())).getScene().getWindow().hide();
+			
+		});
     }
     
     /**Binds the ViewModel with the View
      * 
      */
     public void bindingDetailsWindow() {
-    	
+    	this.details.textProperty().bind(this.vm.getDeatails());
     }
     
     
-    
+    /**sets the task list in ViewModel
+     * 
+     * @param task the list of task being passed in
+     * @return boolean to the MainWindow letting it know if it worked
+     */
+    public boolean setSelectedDetail(Task task) {
+    	return this.vm.setDetailForView(task);
+	}
     
     
     

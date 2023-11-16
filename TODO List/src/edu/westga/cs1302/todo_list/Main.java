@@ -18,6 +18,8 @@ public class Main extends Application {
 	private static final String GUI_RESOURCE = "view/MainWindow.fxml";
 	public static final String ADD_TASK_TITLE = "AddTask";
 	public static final String ADD_TASK_DIALOG = "view/CreateTaskWindow.fxml";
+	public static final String ADD_DETAIL_TITLE = "Details";
+	public static final String ADD_DETAIL_DIALOG = "view/DetailWindow.fxml";
 
 	/**
 	 * JavaFX entry point.
