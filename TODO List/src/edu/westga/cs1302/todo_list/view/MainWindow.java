@@ -54,6 +54,9 @@ public class MainWindow {
 		this.createTask.setOnAction((event) -> {
 			this.createCreateTaskWindow();
 		});
+		this.taskOrder.setOnAction((event)-> {
+			this.vm.updateDisplay();
+		});
 	}
 
 	/**

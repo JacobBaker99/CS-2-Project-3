@@ -92,6 +92,7 @@ public class MainWindowViewModel {
 	 * @return list of comparators
 	 */
 	public ListProperty<Comparator<Task>> getSortingComparatorList() {
+		this.updateDisplay();
 		return this.sortingComparatorList;
 	}
 
@@ -129,5 +130,6 @@ public class MainWindowViewModel {
 	 */
 	public void setTaskSortingComparator(ObjectProperty<Comparator<Task>> taskSortingComparator) {
 		this.taskSortingComparator = taskSortingComparator;
+		this.updateDisplay();
 	}
 }
