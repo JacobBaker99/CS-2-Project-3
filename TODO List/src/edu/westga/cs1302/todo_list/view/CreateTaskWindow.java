@@ -102,7 +102,6 @@ public class CreateTaskWindow {
      * @param tasks the list of task being passed in
      * @return boolean to the MainWindow letting it know if it worked
      */
-    
     //TODO Move to ViewModel with a call here
     public boolean setTaskList(ObservableList<Task> tasks) {
 		if (tasks == null) {
