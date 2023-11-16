@@ -13,7 +13,6 @@ class TestCompare {
 	@Test
 	void testNullFirstTask() {
 		TimeToCompleteComparator comparator = new TimeToCompleteComparator();
-		Task task1 = new Task("a", "b", 1, TaskPriority.LOW);
 		Task task2 = new Task("a", "b", 1, TaskPriority.LOW);
 		
 		assertThrows(IllegalArgumentException.class, ()->{comparator.compare(null, task2);});
@@ -23,7 +22,6 @@ class TestCompare {
 	void testNullSecondTask() {
 		TimeToCompleteComparator comparator = new TimeToCompleteComparator();
 		Task task1 = new Task("a", "b", 1, TaskPriority.LOW);
-		Task task2 = new Task("a", "b", 1, TaskPriority.LOW);
 		
 		assertThrows(IllegalArgumentException.class, ()->{comparator.compare(task1, null);});
 	}

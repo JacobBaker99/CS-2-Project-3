@@ -59,7 +59,7 @@ public class MainWindow {
 				addTaskStage.setScene(scene);
 				addTaskStage.initModality(Modality.APPLICATION_MODAL);
 				CreateTaskWindow controller = (CreateTaskWindow) loader.getController();
-				if (controller.setTaskList(this.taskListView.getItems())) {
+				if (controller.setTaskListCreateTask(this.taskListView.getItems())) {
 					addTaskStage.showAndWait();
 					this.vm.updateDisplay();
 				}

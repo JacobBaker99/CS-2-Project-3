@@ -10,6 +10,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 
 /**The ViewModel for MainWidow
@@ -200,7 +201,23 @@ public class CreateTaskViewModel {
 		this.selectedTask = selectedTask;
 	}	
 	
-	/**
-	 * Above is for testing purposes
-	 */
+	/**sets the task list in ViewModel
+     * 
+     * @param tasks the list of task being passed in
+     * @return boolean to the MainWindow letting it know if it worked
+     */
+    public boolean setTaskListForView(ObservableList<Task> tasks) {
+		if (tasks == null) {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setContentText("Unable to acess task list");
+			alert.showAndWait();
+			return false;
+		} else {
+			ListProperty<Task> newTaskList = new SimpleListProperty<Task>();
+			//newTaskList.addAll(tasks);
+			newTaskList.set(tasks);
+			this.setTaskList(newTaskList);
+			return true;
+		}
+	}
 }
